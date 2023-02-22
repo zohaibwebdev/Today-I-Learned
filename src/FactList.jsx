@@ -1,6 +1,7 @@
 import React from "react";
 import { CATEGORIES } from "./catagories";
-const FactList = ({ facts }) => {
+import supabase from "./supabase";
+const FactList = ({ facts, setFacts }) => {
   console.log(facts);
   return (
     <>
@@ -25,7 +26,23 @@ const FactList = ({ facts }) => {
                 {fact.catagory}
               </span>
               <div className="vote-buttons">
-                <button>👍 {fact.votesIntresting}</button>
+                <button
+                  onClick={async () => {
+                    const { data, error } = await supabase
+                      .from("facts")
+                      .update({ votesIntresting: fact.votesIntresting + 1 })
+                      .eq("id", fact.id)
+                      .select();
+                    console.log(data);
+                    if (!error) {
+                      setFacts((facts) =>
+                        facts.map((f) => (f.id === fact.id ? data[0] : f))
+                      );
+                    }
+                  }}
+                >
+                  👍 {fact.votesIntresting}
+                </button>
                 <button>⛔️ {fact.votesFalse}</button>
                 <button>🤯 {fact.votesMindblowing}</button>
               </div>

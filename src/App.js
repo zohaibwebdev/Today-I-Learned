@@ -44,7 +44,7 @@ function App() {
       </FormContext.Provider>
       <main className="main">
         <Filter CATEGORIES setCata={setCata} />
-        {loading ? <Loader /> : <FactList facts={facts} />}
+        {loading ? <Loader /> : <FactList facts={facts} setFacts={setFacts} />}
       </main>
     </>
   );

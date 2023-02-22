@@ -9,13 +9,12 @@ const FactForum = ({ setFacts, setShowForm }) => {
   const textLength = text.length;
   async function submitHandler(e) {
     e.preventDefault();
-    // console.log(text, source, category);
+    console.log(text, source, category);
     const { data: newFact, error } = await supabase
       .from("facts")
-      .insert([{ text, source, catagory: "history" }]);
+      .insert([{ text, source }]);
     console.log(newFact);
 
-    setFacts((facts) => [newFact[0], ...facts]);
     setText("");
     setSource("");
     setCategory("");
