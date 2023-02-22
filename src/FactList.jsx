@@ -25,18 +25,18 @@ const FactList = ({ facts, setFacts }) => {
           {facts.map((fact) => (
             <li key={fact.id} className="fact">
               <p>
-                {fact.fact}
+                {fact.text}
                 <a className="source" href={fact.source} target="_blank">
                   source
                 </a>
               </p>
               <span
                 className="tag"
-                style={{
-                  backgroundColor: CATEGORIES.find(
-                    (cat) => cat.name === fact.catagory
-                  ).color,
-                }}
+                // style={{
+                //   backgroundColor: CATEGORIES.find(
+                //     (cat) => cat.name === fact.catagory
+                //   ).color,
+                // }}
               >
                 {fact.catagory}
               </span>

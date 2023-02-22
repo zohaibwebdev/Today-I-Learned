@@ -5,19 +5,19 @@ import supabase from "./supabase";
 const FactForum = ({ setFacts, setShowForm }) => {
   const [text, setText] = useState("");
   const [source, setSource] = useState("");
-  const [category, setCategory] = useState("");
+  const [catagory, setCatagory] = useState("");
   const textLength = text.length;
   async function submitHandler(e) {
     e.preventDefault();
-    console.log(text, source, category);
+    console.log(text, source, catagory);
     const { data: newFact, error } = await supabase
       .from("facts")
-      .insert([{ text, source }]);
-    console.log(newFact);
-
+      .insert([{ text, source, catagory }])
+      .select();
+    if (!error) setFacts((facts) => [newFact[0], ...facts]);
     setText("");
     setSource("");
-    setCategory("");
+    setCatagory("");
     setShowForm(false);
   }
 
@@ -39,7 +39,7 @@ const FactForum = ({ setFacts, setShowForm }) => {
           value={source}
           onChange={(e) => setSource(e.target.value)}
         />
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select value={catagory} onChange={(e) => setCatagory(e.target.value)}>
           <option value="">Choose Catgory...</option>
           {CATEGORIES.map((cat) => (
             <option key={cat.name}>{cat.name.toUpperCase()}</option>
