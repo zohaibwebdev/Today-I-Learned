@@ -13,6 +13,11 @@ body {
 .hidden {
   display: none !important;
 }
+.message {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 32px;
+}
 #root {
   max-width: 1200px;
   margin: 0 auto;

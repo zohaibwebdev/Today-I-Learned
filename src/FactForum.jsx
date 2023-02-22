@@ -1,15 +1,27 @@
 import { CATEGORIES } from "./catagories";
 import React, { useState } from "react";
+import supabase from "./supabase";
 
-const FactForum = () => {
+const FactForum = ({ setFacts, setShowForm }) => {
   const [text, setText] = useState("");
   const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
   const textLength = text.length;
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
-    console.log(text, source, category);
+    // console.log(text, source, category);
+    const { data: newFact, error } = await supabase
+      .from("facts")
+      .insert([{ text, source, catagory: "history" }]);
+    console.log(newFact);
+
+    setFacts((facts) => [newFact[0], ...facts]);
+    setText("");
+    setSource("");
+    setCategory("");
+    setShowForm(false);
   }
+
   return (
     <>
       <form className="fact-form" onSubmit={submitHandler}>

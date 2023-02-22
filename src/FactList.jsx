@@ -25,13 +25,14 @@ const FactList = ({ facts }) => {
                 {fact.catagory}
               </span>
               <div className="vote-buttons">
-                <button>👍 24</button>
-                <button>👎 24</button>
-                <button>⛔ 24</button>
+                <button>👍 {fact.votesIntresting}</button>
+                <button>⛔️ {fact.votesFalse}</button>
+                <button>🤯 {fact.votesMindblowing}</button>
               </div>
             </li>
           ))}
         </ul>
+        there are curently {facts.length} facts. add yours....
       </section>
     </>
   );
